@@ -1,12 +1,12 @@
-void catcher {
+class catcher {
   PVector loc;
   float d;
-  catcher(float y;) {
-    loc = new PVector(mouseX, y);
-    d = 20;
+  catcher() {
+    loc = new PVector(mouseX, height*5/6);
+    d = 50;  
   }
   void display() {
     fill(255);
-    ellipse(loc.x,loc.y,d,d);
-  }
+    ellipse(mouseX,loc.y,d,d);
+  }   
 }

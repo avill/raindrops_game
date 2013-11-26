@@ -1,16 +1,19 @@
-class raindrop {
+class raindrops {
   PVector loc, vel;
-  float d;
- raindrop() {
-    loc = new PVector(random(width),0);
-    vel = new PVector(0,random(2,15));
-    d=25;
+  float d,hue;
+  boolean gone;
+  raindrops() {
+    loc = new PVector(random(width), random(-15,0));
+    vel = new PVector(0, random(1,5));
+    d=10;
+    hue = 0;
+    gone = true;
   }
   void display() {
-    fill(200,220,245);
-    ellipse(loc.x,loc.y,d,d);
+      fill(hue,0,255);
+      ellipse(loc.x, loc.y, d, d);
   }
-  
+
   void fall() {
     loc.add(vel);
     if(loc.y>height) {
@@ -20,4 +23,10 @@ class raindrop {
       loc.x=0;
     }
   }
+  void checkCatcher(catcher c) {
+    if (loc.dist(c.loc)<c.d/2) { 
+     hue+=5;
+    }
+  }
 }
+
