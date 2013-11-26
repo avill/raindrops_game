@@ -1,4 +1,4 @@
-Raindrops Game
+Description
 ==============
 Raindrops will fall from the sky and must be caught by the catcher. If a raindrop touches the cathcer, it is caught. If a raindrop if caught, the score increases by one. If the raindrop touches the bottom of the screen, its game over. 
 
