@@ -1,14 +1,17 @@
 class raindrops {
   PVector loc, vel;
-  int d;
+  int w,h;
+  PImage img;
   raindrops() {
-    loc = new PVector(random(width), -d);
-    vel = new PVector(0, random(1, 5));
-    d=10;
+    loc = new PVector(random(width), -h);
+    vel = new PVector(0, random(2, 5));
+    w = 50;
+    h = 100;
+    img = loadImage("dwarf.png");
   }
   void display() {
-    fill(50, 100, 230);
-    ellipse(loc.x, loc.y, d, d);
+    image(img,loc.x,loc.y,w,h);
+
   }
 
   void fall() {

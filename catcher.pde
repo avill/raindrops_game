@@ -13,7 +13,7 @@ class catcher {
     loc.set(mouseX, height*5/6);
   }
   boolean checkDrop(raindrops r) {
-    if (loc.dist(r.loc) < d/2 + r.d/2) {
+    if (loc.dist(r.loc) < d/2 + r.w/2) {
       return true;
     }
     else {
