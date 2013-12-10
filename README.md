@@ -1,7 +1,6 @@
 Description
 ==============
-Raindrops will fall from the sky and must be caught by the catcher. If a raindrop touches the cathcer, it is caught. If a raindrop if caught, the score increases by one. If the raindrop touches the bottom of the screen, its game over. 
-
+Catch the dwarves as they leap from the cliff! As the dwarves fall they must be caught by the eagle. Every time a dwarf is caught, the score increases by 1. If all 13 dwarves are caught, then the game is won. If one is not caught by the catcher then it is game over.
 Steps of Making the Game
 ========================
 1. Create raindrop
