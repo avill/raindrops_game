@@ -41,7 +41,7 @@ void draw() {
       //the score increases and the threshold decreases, speeding up how fast the drops fall
     }
   }
-  if(score==2) {
+  if(score==13) {
     // if the score equals 13, then the "you win" screen comes up
     image(img2,0,height/7);
     fill(100,250,100);
