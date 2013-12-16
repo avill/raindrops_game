@@ -24,5 +24,13 @@ class catcher {
       //otherwise, return a false value
     }
   }
+  boolean checkCone(pinecones p) {
+    if(loc.dist(p.loc) < d/2 + p.d/2) {
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
 }
 

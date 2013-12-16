@@ -1,7 +1,8 @@
 raindrops[] drops = new raindrops[13];
+pinecones[] cones = new pinecones[20];
 catcher c1;
 boolean start, stop, instructions;
-int score;
+int score, lives;
 int index = 1;
 int oldTime= 0;
 int threshold = 3000;
@@ -18,6 +19,9 @@ void setup() {
   for (int i=0; i<drops.length; i++) {
     drops[i] = new raindrops();
   }
+  for (int k=0; k<cones.length; k++) {
+    cones[k] = new pinecones();
+  }
   c1 = new catcher();
   start = true;
   stop = true;
@@ -25,6 +29,8 @@ void setup() {
   w=150;
   h=100;
   rec1 = new PVector(width*7/16, height/2);
+  score=0;
+  lives=0;
 }
 void draw() {
   if (start == true && stop==true && instructions == true) {
@@ -51,50 +57,68 @@ void draw() {
     text("press any key to reset", width*2/5, height*2/3);
   }
 
-if (start == false && stop==true) {
-  background(img);
-  textSize(100);
-  fill(255);
-  text( score, 0, 100);
-  c1.display();
-  c1.update();
-  if (millis() - oldTime > threshold) { 
-    if (index< drops.length) {
-      index++;
-      oldTime = millis();
-      //if the difference b/w millis and oldTime is greater than threshold,
-      //then one drop falls
+  if (start == false && stop==true) {
+    background(img);
+    textSize(100);
+    fill(255);
+    text( score, 0, 100);
+    fill(100,50,50);
+    text(lives, 0, width-100);
+    c1.display();
+    c1.update();
+    if (millis() - oldTime > threshold) { 
+      if (index< drops.length) {
+        index++;
+        oldTime = millis();
+        //if the difference b/w millis and oldTime is greater than threshold,
+        //then one drop falls
+      }
     }
-  }
-  for (int i=0;i<index;i++) {
-    drops[i].display();
-    drops[i].fall();
+    for (int i=0;i<index;i++) {
+      drops[i].display();
+      drops[i].fall();
 
-    if (c1.checkDrop(drops[i]) == true) {
-      drops[i].goAway();
-      score++;
-      threshold-=100;
-      //if a drop passes through the catcher, then the drop disappears and
-      //the score increases and the threshold decreases, speeding up how fast the drops fall
+      if (c1.checkDrop(drops[i]) == true) {
+        drops[i].goAway();
+        score++;
+        threshold-=100;
+        //if a drop passes through the catcher, then the drop disappears and
+        //the score increases and the threshold decreases, speeding up how fast the drops fall
+      }
+      if (drops[i].loc.y>height) {
+        //if a drop falls past the bottom of the screen then you go to lose screen
+        start=true;
+        stop=false;
+        drops[i].goAway();
+      }
     }
-    if (drops[i].loc.y>height) {
-      //if a drop falls past the bottom of the screen then you go to lose screen
-      start=true;
+    for (int k=0; k<cones.length; k++) {
+      cones[k] = new pinecones();
+      cones[k].display();
+      cones[k].fall();
+
+      if (c1.checkCone(cones[k]) == true) {
+        cones[k].goAway();
+        lives++;
+      }
+    }
+    if (score==13) {
+      // if the score equals 13, then stop=false then the win screen is displayed
       stop=false;
-      drops[i].goAway();
+    }
+    if (lives==3) {
+      stop=false;
     }
   }
-}
-if (score==2) {
-  // if the score equals 13, then stop=false then the win screen is displayed
-  stop=false;
-}
-if (start==true && stop==false) {
-  //game over screen
-  image(img4, 0, 0, width, height);
-  fill(255, 0, 0);
-  text("GAME OVER", width/4, height/4);
-}
+  if (start==true && stop==false) {
+    //game over screen
+    image(img4, 0, 0, width, height);
+    fill(255, 0, 0);
+    textSize(50);
+    text("GAME OVER", width/7, height/4);
+    textSize(25);
+    text("press any key to restart", width*3/5, height*4/5);
+  }
 }
 void mousePressed() {
   if ( mouseX>rec1.x && mouseX<rec1.x+w 
@@ -107,6 +131,7 @@ void keyPressed() {
   start=true;
   stop=true;
   score=0;
+  lives=0; 
   index=1;
 }
 
