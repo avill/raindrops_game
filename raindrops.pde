@@ -24,14 +24,5 @@ class raindrops {
     vel.set(0, 0);
     //sets the location to a point beyond the screen and stops the movement
   }
-  boolean lose() { //if the raindrops falls past the bottom of the screen 
-    //then the game over image appears
-    if (loc.y>height) {
-      return true;
-    }
-    else {
-      return false;
-    }
-  }
 }
 
