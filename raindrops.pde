@@ -4,8 +4,8 @@ class raindrops {
   PImage img;
 
   raindrops() {
-    loc = new PVector(random(width), -h);
-    vel = new PVector(0, random(3, 5));
+    loc = new PVector(random(width-50), -h);
+    vel = new PVector(0, random(2, 5));
     w = 50;
     h = 100;
     img = loadImage("dwarf.png");

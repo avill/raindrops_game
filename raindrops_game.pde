@@ -1,5 +1,6 @@
-raindrops[] drops = new raindrops[13];
-pinecones[] cones = new pinecones[20];
+int dw=13;
+raindrops[] drops = new raindrops[dw];
+pinecones[] cones = new pinecones[120];
 catcher c1;
 boolean start, stop, instructions;
 int score, lives;
@@ -30,7 +31,7 @@ void setup() {
   h=100;
   rec1 = new PVector(width*7/16, height/2);
   score=0;
-  lives=0;
+  lives=5;
 }
 void draw() {
   if (start == true && stop==true && instructions == true) {
@@ -62,8 +63,8 @@ void draw() {
     textSize(100);
     fill(255);
     text( score, 0, 100);
-    fill(100,50,50);
-    text(lives, 0, width-100);
+    fill(200,50,50);
+    text(lives,width-100,100);
     c1.display();
     c1.update();
     if (millis() - oldTime > threshold) { 
@@ -77,6 +78,9 @@ void draw() {
     for (int i=0;i<index;i++) {
       drops[i].display();
       drops[i].fall();
+      if(i==dw) {
+        i=0;
+      }
 
       if (c1.checkDrop(drops[i]) == true) {
         drops[i].goAway();
@@ -90,24 +94,25 @@ void draw() {
         start=true;
         stop=false;
         drops[i].goAway();
+      
       }
     }
-    for (int k=0; k<cones.length; k++) {
-      cones[k] = new pinecones();
+    for (int k=0; k<index*4; k++) {
       cones[k].display();
       cones[k].fall();
 
       if (c1.checkCone(cones[k]) == true) {
         cones[k].goAway();
-        lives++;
+        lives--;
       }
     }
-    if (score==13) {
+    if (score==dw) {
       // if the score equals 13, then stop=false then the win screen is displayed
       stop=false;
     }
-    if (lives==3) {
-      stop=false;
+    if (lives==0) {
+      stop=!stop;
+      start=!start;
     }
   }
   if (start==true && stop==false) {
@@ -131,7 +136,7 @@ void keyPressed() {
   start=true;
   stop=true;
   score=0;
-  lives=0; 
+  lives=5; 
   index=1;
 }
 

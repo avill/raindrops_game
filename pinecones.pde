@@ -4,13 +4,13 @@ class pinecones {
   PImage img;
 
   pinecones() {
-    loc = new PVector(random(width), -h);
-    vel = new PVector(0, random(2, 7));
+    loc = new PVector(random(width), random(0,-50));
+    vel = new PVector(0, random(5, 7));
     d = 25;
     img = loadImage("pinecone.png");
   }
   void display() {
-    image(img, loc.x, loc.y, w, h);
+    image(img, loc.x, loc.y, d,d);
   }
   void fall() {
     loc.add(vel);
